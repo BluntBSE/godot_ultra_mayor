@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw7edr4b5ui1f"]
+
+[ext_resource type="Texture2D" uid="uid://fawhddsu8c3w" path="res://Cards/Resources/PlayerCards/Backgrounds/texture_one.jpg" id="1_mygem"]
+[ext_resource type="Texture2D" uid="uid://rucdmqsvueqr" path="res://Cards/Resources/PlayerCards/Art_Images/shark_mecha.jpg" id="2_5s5sm"]
+
+[node name="super_simple" type="AspectRatioContainer"]
+offset_left = 510.0
+offset_top = 511.0
+offset_right = 510.0
+offset_bottom = 511.0
+
+[node name="background" type="Sprite2D" parent="."]
+modulate = Color(0.462745, 0.454902, 0.470588, 1)
+position = Vector2(422, 239)
+texture = ExtResource("1_mygem")
+
+[node name="art_image" type="Sprite2D" parent="."]
+position = Vector2(130, 129)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_5s5sm")
+
+[node name="description" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "No description loaded"
+scroll_active = false

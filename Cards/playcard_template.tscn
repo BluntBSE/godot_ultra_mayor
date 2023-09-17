@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1qcwf2q7ftam"]
+
+[ext_resource type="Script" path="res://Cards/playcard_template.gd" id="1_7t8j6"]
+[ext_resource type="Texture2D" uid="uid://fawhddsu8c3w" path="res://Cards/Resources/PlayerCards/Backgrounds/texture_one.jpg" id="2_n2drb"]
+[ext_resource type="Texture2D" uid="uid://rucdmqsvueqr" path="res://Cards/Resources/PlayerCards/Art_Images/shark_mecha.jpg" id="3_vsslp"]
+
+[node name="playcard_template" type="MarginContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 140)
+offset_right = 100.0
+offset_bottom = 140.0
+script = ExtResource("1_7t8j6")
+
+[node name="background" type="Sprite2D" parent="."]
+modulate = Color(0.462745, 0.454902, 0.470588, 1)
+position = Vector2(422, 239)
+texture = ExtResource("2_n2drb")
+
+[node name="art_image" type="Sprite2D" parent="."]
+position = Vector2(50, 43)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_vsslp")
+
+[node name="description" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "No description loaded"
+scroll_active = false

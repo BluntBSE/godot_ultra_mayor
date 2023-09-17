@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://dturma8o0c65k"]
+
+[ext_resource type="Theme" uid="uid://cccbabxpdanm3" path="res://Themes/Debug_Theme.tres" id="1_ljhrr"]
+[ext_resource type="Script" path="res://Screens/firefight_button.gd" id="2_653v7"]
+[ext_resource type="Script" path="res://Screens/camera_ghost.gd" id="3_sw714"]
+[ext_resource type="Texture2D" uid="uid://ba1dqxr5ot774" path="res://Cards/Resources/PlayerCards/Art_Images/zilla_crawl.jpg" id="4_tevjq"]
+[ext_resource type="Texture2D" uid="uid://dllwxwcvphsve" path="res://Cards/Resources/PlayerCards/Art_Images/Tank.jpg" id="5_1sspy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6gl0g"]
+size = Vector2(9.75, 10.4651)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(250, 250)
+offset_left = 2.0
+offset_top = 7.0
+offset_right = 252.0
+offset_bottom = 257.0
+scale = Vector2(1.58136, 1.40845)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/AspectRatioContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.207843)
+
+[node name="Label" type="Label" parent="CanvasLayer/AspectRatioContainer/ColorRect"]
+self_modulate = Color(0, 1, 1, 1)
+layout_mode = 2
+offset_left = 1.8971
+offset_top = 0.709999
+offset_right = 251.897
+offset_bottom = 26.71
+text = "Card Spawn Commands"
+
+[node name="Button" type="Button" parent="CanvasLayer/AspectRatioContainer/ColorRect"]
+layout_mode = 0
+offset_left = 1.26472
+offset_top = 63.1901
+offset_right = 168.265
+offset_bottom = 94.1901
+theme = ExtResource("1_ljhrr")
+text = "Spawn \"Firefighters\""
+script = ExtResource("2_653v7")
+
+[node name="Button2" type="Button" parent="CanvasLayer/AspectRatioContainer/ColorRect"]
+layout_mode = 0
+offset_left = 2.52945
+offset_top = 126.38
+offset_right = 169.529
+offset_bottom = 157.38
+theme = ExtResource("1_ljhrr")
+text = "Spawn \"Tigermech\""
+
+[node name="camera_ghost" type="CharacterBody2D" parent="."]
+position = Vector2(957, 539)
+scale = Vector2(20, 21.503)
+script = ExtResource("3_sw714")
+
+[node name="Camera2D" type="Camera2D" parent="camera_ghost"]
+
+[node name="Sprite2D" type="Sprite2D" parent="camera_ghost"]
+scale = Vector2(0.005, 0.005)
+texture = ExtResource("4_tevjq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="camera_ghost"]
+scale = Vector2(0.533508, -0.623928)
+shape = SubResource("RectangleShape2D_6gl0g")
+
+[node name="ReferenceSprite" type="Sprite2D" parent="."]
+position = Vector2(420, 42)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("5_1sspy")

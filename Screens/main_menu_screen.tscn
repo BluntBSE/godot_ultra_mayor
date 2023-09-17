@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dox78shd6kb0r"]
+
+[ext_resource type="Script" path="res://resource_Loader.gd" id="1_7b6ws"]
+[ext_resource type="Resource" uid="uid://cercde1gkbtt" path="res://Cards/Resources/card_resource.tres" id="2_g0ja1"]
+
+[node name="MainMenuScreen" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_7b6ws")
+stats = ExtResource("2_g0ja1")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]

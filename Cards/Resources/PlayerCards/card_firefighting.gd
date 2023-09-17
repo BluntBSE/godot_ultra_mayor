@@ -1,0 +1,1 @@
+extends playcard_base
