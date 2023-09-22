@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://bs40m1kungf3d"]
+
+[ext_resource type="Texture2D" uid="uid://djaidhcglakb5" path="res://Cards/Resources/Backgrounds/landscape_dark.jpg" id="1_vilpx"]
+[ext_resource type="Script" path="res://Screens/PlayMatBackground.gd" id="2_iocyt"]
+[ext_resource type="Script" path="res://Screens/PlayMat/draw_from_deck.gd" id="3_i1dto"]
+[ext_resource type="Texture2D" uid="uid://cpxsxp2vr8kc6" path="res://addons/sprite_painter/graphics/circle_shape_2d.svg" id="4_dydgn"]
+
+[node name="CardPlayMat" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_vilpx")
+centered = false
+script = ExtResource("2_iocyt")
+
+[node name="Public Works" type="Button" parent="."]
+modulate = Color(0.0588235, 1, 0.0705882, 1)
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 107.0
+offset_bottom = 28.0
+text = "Public Works"
+script = ExtResource("3_i1dto")
+_deck_list = "green"
+
+[node name="Safety" type="Button" parent="."]
+modulate = Color(1, 0.0941176, 0.0862745, 1)
+offset_top = 47.0
+offset_right = 106.0
+offset_bottom = 78.0
+text = "Public Safety
+"
+script = ExtResource("3_i1dto")
+_deck_list = "red"
+
+[node name="Information" type="Button" parent="."]
+modulate = Color(0.0509804, 1, 1, 1)
+offset_top = 103.0
+offset_right = 106.0
+offset_bottom = 134.0
+text = "Information"
+script = ExtResource("3_i1dto")
+_deck_list = "blue"
+
+[node name="Health" type="Button" parent="."]
+modulate = Color(1, 0.0666667, 1, 1)
+offset_top = 166.0
+offset_right = 106.0
+offset_bottom = 197.0
+text = "Health
+"
+script = ExtResource("3_i1dto")
+_deck_list = "pink"
+
+[node name="Energy" type="Button" parent="."]
+modulate = Color(1, 1, 0.188235, 1)
+offset_top = 232.0
+offset_right = 106.0
+offset_bottom = 263.0
+text = "Energy
+"
+script = ExtResource("3_i1dto")
+_deck_list = "yellow"
+
+[node name="Initialize" type="Button" parent="."]
+modulate = Color(1, 0.996078, 0.992157, 1)
+offset_left = -1.0
+offset_top = 308.0
+offset_right = 140.0
+offset_bottom = 339.0
+text = "INITIALIZE DECKS"
+
+[node name="PlayerHand" type="Node2D" parent="."]
+position = Vector2(648, 755)
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerHand"]
+texture = ExtResource("4_dydgn")

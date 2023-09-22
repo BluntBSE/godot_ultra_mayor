@@ -1,12 +1,12 @@
-extends Node #Do I really need to extend node? Then again, it could be useful for assigning targets.
-#Do I need to clean up after myself if so?
+extends ColorRect
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("You called new_script.gd!")
+	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print(color)
 	pass

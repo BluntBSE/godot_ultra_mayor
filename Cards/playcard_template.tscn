@@ -1,27 +1,108 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1qcwf2q7ftam"]
+[gd_scene load_steps=5 format=3 uid="uid://d1qcwf2q7ftam"]
 
 [ext_resource type="Script" path="res://Cards/playcard_template.gd" id="1_7t8j6"]
-[ext_resource type="Texture2D" uid="uid://fawhddsu8c3w" path="res://Cards/Resources/PlayerCards/Backgrounds/texture_one.jpg" id="2_n2drb"]
-[ext_resource type="Texture2D" uid="uid://rucdmqsvueqr" path="res://Cards/Resources/PlayerCards/Art_Images/shark_mecha.jpg" id="3_vsslp"]
+[ext_resource type="Texture2D" uid="uid://dnbgwbfqnlequ" path="res://Cards/Resources/PlayerCards/Backgrounds/texture_one.png" id="2_1r0ui"]
+[ext_resource type="Texture2D" uid="uid://bvwwu75vr3pb6" path="res://Cards/Resources/PlayerCards/Art_Images/landscape_artbot.jpg" id="3_xdc5x"]
+[ext_resource type="Script" path="res://Cards/MarginColor.gd" id="4_56ci6"]
 
 [node name="playcard_template" type="MarginContainer"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 140)
-offset_right = 100.0
-offset_bottom = 140.0
+custom_minimum_size = Vector2(200, 280)
+offset_right = 200.0
+offset_bottom = 280.0
 script = ExtResource("1_7t8j6")
 
-[node name="background" type="Sprite2D" parent="."]
-modulate = Color(0.462745, 0.454902, 0.470588, 1)
-position = Vector2(422, 239)
-texture = ExtResource("2_n2drb")
-
-[node name="art_image" type="Sprite2D" parent="."]
-position = Vector2(50, 43)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_vsslp")
-
-[node name="description" type="RichTextLabel" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-text = "No description loaded"
-scroll_active = false
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+self_modulate = Color(0.14902, 0.14902, 0.14902, 1)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("2_1r0ui")
+expand_mode = 2
+
+[node name="CardName" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TextureRect"]
+unique_name_in_owner = true
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+offset_top = -3.0
+offset_right = 200.0
+offset_bottom = 20.0
+text = "Card Name"
+fit_content = true
+
+[node name="EnergyCost" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TextureRect"]
+unique_name_in_owner = true
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+offset_left = 184.0
+offset_top = -2.0
+offset_right = 384.0
+offset_bottom = 21.0
+text = "2"
+fit_content = true
+
+[node name="ArtImage" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("3_xdc5x")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+self_modulate = Color(0.14902, 0.14902, 0.14902, 1)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("2_1r0ui")
+expand_mode = 2
+
+[node name="CardTypes" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TextureRect2"]
+unique_name_in_owner = true
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 0
+theme_override_font_sizes/italics_font_size = 0
+theme_override_font_sizes/bold_italics_font_size = 0
+theme_override_font_sizes/mono_font_size = 0
+text = "Physical, Water"
+fit_content = true
+
+[node name="DescriptionArea" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/DescriptionArea"]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_top = 5.0
+offset_right = 200.0
+offset_bottom = 115.0
+text = "Card description is here"
+
+[node name="MarginColor" type="ColorRect" parent="."]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 2
+color = Color(0.454902, 0.662745, 0.662745, 1)
+script = ExtResource("4_56ci6")

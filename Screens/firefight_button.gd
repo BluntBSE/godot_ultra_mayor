@@ -1,7 +1,12 @@
 extends Button
 
-
-
+var card_library = preload("res://Cards/Resources/PlayerCards/card_library.gd")
+func assdrawdign_card(card,cardid): #This should belong to the card prototype for sure instead of being here. 
+	#Probably hit it with call or callv.
+	
+	
+	
+	pass
 #Probably need an unpacking function where the data is parsed to the card.
 func print_me():
 	print("You called print_me")
@@ -12,8 +17,7 @@ func spawn_card():
 func _ready():
 	var root_node = get_tree().get_root()
 	print(root_node)
-	#self.pressed.connect(self._button_pressed)
-	#var spawned_card = preload("res://Cards/playcard_template.tscn").instantiate()
+	var spawned_card = preload("res://Cards/playcard_template.tscn").instantiate().init()
 	#root_node.add_child.call_deferred(spawned_card) #This is adding it to the
 
 

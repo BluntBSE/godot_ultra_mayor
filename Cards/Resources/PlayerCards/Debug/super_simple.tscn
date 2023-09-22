@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dw7edr4b5ui1f"]
+[gd_scene load_steps=3 format=3 uid="uid://bvw34dxskb4hf"]
 
 [ext_resource type="Texture2D" uid="uid://fawhddsu8c3w" path="res://Cards/Resources/PlayerCards/Backgrounds/texture_one.jpg" id="1_mygem"]
 [ext_resource type="Texture2D" uid="uid://rucdmqsvueqr" path="res://Cards/Resources/PlayerCards/Art_Images/shark_mecha.jpg" id="2_5s5sm"]
