@@ -1,11 +1,11 @@
 extends Node
 
 var deck_list = {
-	"red":["playcard_bore_cannon","playcard_bore_cannon","playcard_bore_cannon","playcard_bore_cannon","playcard_bore_cannon","playcard_bore_cannon"],
-	"blue": ["playcard_threat_assessment","playcard_predictive_modeling","playcard_threat_assessment","playcard_predictive_modeling","playcard_threat_assessment","playcard_threat_assessment"],
+	"red":["playcard_bore_cannon","playcard_flamethrower","playcard_flamethrower","playcard_bore_cannon","playcard_flamethrower","playcard_bore_cannon"],
+	"blue": ["playcard_threat_assessment","playcard_jujitsu","playcard_threat_assessment","playcard_predictive_modeling","playcard_threat_assessment","playcard_threat_assessment"],
 	"yellow": ["playcard_echo_matrix","playcard_echo_matrix","playcard_echo_matrix","playcard_echo_matrix","playcard_echo_matrix","playcard_echo_matrix"],
 	"pink": ["playcard_glimmer","playcard_glimmer","playcard_glimmer","playcard_glimmer","playcard_glimmer","playcard_glimmer","playcard_glimmer"],
-	"green":["playcard_firefighting","playcard_firefighting","playcard_firefighting","playcard_firefighting","playcard_firefighting","playcard_firefighting",]
+	"green":["playcard_hostile_architecture","playcard_hostile_architecture","playcard_firefighting","playcard_firefighting","playcard_firefighting","playcard_firefighting",]
 }
 
 

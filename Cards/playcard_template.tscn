@@ -7,12 +7,17 @@
 
 [node name="playcard_template" type="MarginContainer"]
 custom_minimum_size = Vector2(200, 280)
-offset_right = 200.0
-offset_bottom = 280.0
+anchors_preset = -1
+anchor_right = 0.109
+anchor_bottom = 0.278
+offset_right = 0.719986
+offset_bottom = -0.240021
+mouse_filter = 0
 script = ExtResource("1_7t8j6")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -23,12 +28,14 @@ custom_minimum_size = Vector2(200, 25)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 self_modulate = Color(0.14902, 0.14902, 0.14902, 1)
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_1r0ui")
 expand_mode = 2
 
@@ -39,6 +46,7 @@ layout_mode = 2
 offset_top = -3.0
 offset_right = 200.0
 offset_bottom = 20.0
+mouse_filter = 2
 text = "Card Name"
 fit_content = true
 
@@ -50,6 +58,7 @@ offset_left = 184.0
 offset_top = -2.0
 offset_right = 384.0
 offset_bottom = 21.0
+mouse_filter = 2
 text = "2"
 fit_content = true
 
@@ -59,6 +68,7 @@ clip_contents = true
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 8
+mouse_filter = 2
 texture = ExtResource("3_xdc5x")
 expand_mode = 2
 
@@ -66,6 +76,7 @@ expand_mode = 2
 self_modulate = Color(0.14902, 0.14902, 0.14902, 1)
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_1r0ui")
 expand_mode = 2
 
@@ -78,6 +89,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 14
 theme_override_font_sizes/bold_font_size = 0
 theme_override_font_sizes/italics_font_size = 0
@@ -90,6 +102,7 @@ fit_content = true
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="DescriptionText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/DescriptionArea"]
 unique_name_in_owner = true
@@ -98,11 +111,16 @@ layout_mode = 0
 offset_top = 5.0
 offset_right = 200.0
 offset_bottom = 115.0
+mouse_filter = 2
 text = "Card description is here"
 
 [node name="MarginColor" type="ColorRect" parent="."]
 unique_name_in_owner = true
 show_behind_parent = true
 layout_mode = 2
+mouse_filter = 2
 color = Color(0.454902, 0.662745, 0.662745, 1)
 script = ExtResource("4_56ci6")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

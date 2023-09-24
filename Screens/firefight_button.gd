@@ -1,16 +1,15 @@
 extends Button
 
 var card_library = preload("res://Cards/Resources/PlayerCards/card_library.gd")
-func assdrawdign_card(card,cardid): #This should belong to the card prototype for sure instead of being here. 
+func assdrawdign_card(card,cardid): #This should belong to the card prototype for sure instead of being here.
 	#Probably hit it with call or callv.
-	
-	
-	
+
+
+
 	pass
 #Probably need an unpacking function where the data is parsed to the card.
-func print_me():
-	print("You called print_me")
-	
+
+
 func spawn_card():
 	pass
 # Called when the node enters the scene tree for the first time.
@@ -24,7 +23,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta): #prefixed delted with _ since it's not used. unprefix if used.
 	pass
-	
+
 func _button_pressed():
-	print_me()
+
 	spawn_card()

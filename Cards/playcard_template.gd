@@ -16,6 +16,10 @@ var i_effect
 var deck_list
 var card_id
 var card
+var focus_scale = 1.5
+var focus_offset = Vector2(0,-(175*focus_scale)) # offset should really be in the same direction >:( That means making this the aprent.
+var focus_rotation = deg_to_rad(0)
+var orig_rotation
 
 const color_map = {
 	"red":{"text": "#C3423F", "body": "#C3423F"},
@@ -25,11 +29,8 @@ const color_map = {
 	"green":{"text": "#9BC53D", "body": "#9BC53D"}
 }
 
-
-
-
 # {
-#	"playcard_firefighting":{
+#	"pc_firefighting":{
 #		"display_name":"Firefighting",
 #		"energy":1,
 #		"types":["Physical", "Water"],
@@ -44,18 +45,46 @@ const color_map = {
 #		"deck_list":"red"
 #	}
 
+var state = "Hidden"
+var t = 0 # for interpolation
+var t_scale = 2 #for interpolation
+var start_pos
+var target_pos
+var start_rotation = rotation
+var target_rotation
+var start_scale
+var target_scale
+var stored_position #When a card is hovered, remember where it came from so it can go back regardless of if it is unhovered before completing.
+
+
+const states = {
+	"InHand": "InHand",
+	"MovingToHand": "MovingToHand",
+	"Reorganizing": "Reorganizing",
+	"InPlay": "InPlay",
+	"HandFocused": "HandFocused",
+	"InHandFocus": "InHandFocus",
+	"OutHandFocus": "OutHandFocus",
+	"Hidden": "Hidden"
+}
+
+#Passes self reference during on mouse enter & exit events to the hand node.
+signal signal_self_in(p_self)
+signal signal_self_out(p_self)
+
+
 func init(p_card_id): ##Not _init() because we're a packed scene, not a single node.
 	self.card_id = p_card_id
 	card = library[p_card_id]
 	assign_card()
 	do_on_played(i_effect)
 	return self #Allows ...instantiate().whatever()
-	
+
 
 
 func assign_card():
 	#print(CardLibrary.library)
-	
+
 	#Set Internal Attributes
 	card_name = card["display_name"]
 	energy = card["energy"]
@@ -70,8 +99,8 @@ func assign_card():
 	script_val_1 = card["script_val_1"]
 	script_val_2 = card["script_val_2"]
 	deck_list = card["deck_list"]
-	
-	
+
+
 	##Set Displayed Attributes
 	%CardName.text = card["display_name"]
 	%EnergyCost.text = str(card["energy"])
@@ -79,22 +108,17 @@ func assign_card():
 	%DescriptionText.text = card["description"]
 	var color_key = card["deck_list"]
 	%MarginColor.color = color_map[color_key]["body"]
-	print(color_map)
-	print(color_map[color_key])
-	print(color_map[color_key]["body"])
-	print( "Color is " + str(%MarginColor.color))
 	%CardTypes.text= ", ".join(types)
-	
-	
-	
-	
+
+func smoother_lerp(x):
+	return ((x) * (x) * (3 - 2 * (x)))
+
+
 func do_on_played(p_i_effect):
 	print(p_i_effect)
 	p_i_effect.on_played()
-	
 
-	
-	
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -103,5 +127,60 @@ func _ready(): #We don't use this because newly spawned cards should have .init(
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta): #added _
+func _process(delta): #added _
+	match state:
+		"InHand":
+			pass
+		"MovingToHand":
+			if t <= 1: #always 1 with linear interpolation
+				position = start_pos.lerp(target_pos, smoother_lerp(t))
+				rotation = lerp(start_rotation, target_rotation,smoother_lerp(t))
+				t += delta * t_scale
+			else:
+				position = target_pos
+				rotation = target_rotation
+				state = "InHand"
+				t = 0 #Just in case.See if this causes animation problems later though.
+			pass
+		"Reorganizing":
+			pass
+		"InPlay":
+			pass
+		"HandFocused": #Unecessary but...Whatever
+			pass
+		"InHandFocus":
+			if t <= 1: #always 1 with linear interpolation
+				position = start_pos.lerp(target_pos, t)
+				scale = start_scale.lerp(target_scale, t)
+				t += delta * t_scale
+			else:
+				position = target_pos
+				scale = target_scale
+				t = 0
+				state = "HandFocused"
+
+			pass
+		"OutHandFocus":
+				if t <= 1: #always 1 with linear interpolation
+					position = start_pos.lerp(target_pos, smoother_lerp(t))
+					scale = start_scale.lerp(target_scale, smoother_lerp(t))
+					t += delta * t_scale
+				else:
+					position = target_pos
+					scale = target_scale
+					t = 0
+					state = "InHand"
+		"Hidden":
+			pass
+
 	pass
+
+
+func _on_mouse_entered():
+	signal_self_in.emit(self)
+	pass # Replace with function body.
+
+
+func _on_mouse_exited():
+	signal_self_out.emit(self)
+	pass # Replace with function body.

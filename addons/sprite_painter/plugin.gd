@@ -80,7 +80,7 @@ func _connect_editor_viewports():
 func _add_enable_button(container_id):
 	var enable_button = Button.new()
 	add_control_to_container(container_id, enable_button)
-	
+
 	enable_button.add_theme_stylebox_override("normal", StyleBoxEmpty.new())
 	enable_button.add_theme_stylebox_override("hover", StyleBoxEmpty.new())
 	enable_button.add_theme_stylebox_override("pressed", StyleBoxEmpty.new())
@@ -115,7 +115,7 @@ func make_visible(visible):
 	sploinky3.visible = visible
 	if visible:
 		editor_view.edit_object(editor_view.edited_object)
-	
+
 	else:
 		editor_view.save_changes()
 		if editor_view.unsaved_image_paths.size() == 0:

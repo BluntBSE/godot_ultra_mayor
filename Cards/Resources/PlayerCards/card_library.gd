@@ -1,6 +1,5 @@
 extends Node #Do I even need to extend Node?
 #class_name card_library
-
 const library = {
 	"playcard_firefighting":{
 		"display_name":"Firefighting",
@@ -16,12 +15,54 @@ const library = {
 		"script_val_2":2,
 		"deck_list": "green"
 	},
+		"playcard_hostile_architecture":{
+		"display_name":"Hostile Architecture",
+		"energy":1,
+		"types":["Physical"],
+		"art_image":"res://Cards/Resources/PlayerCards/Art_Images/fire_mecha.jpg",
+		"description":"Deal two damage to target Kaiju deck. Lock that deck for 1 turn.",
+		"effect":"res://Cards/Resources/PlayerCards/Card_Scripts/firefighter_effect.gd",
+		"card_owner":"Player",
+		"targeting_types":["all_kaiju"],
+		"targeting_num":1,
+		"script_val_1":1,
+		"script_val_2":2,
+		"deck_list": "green"
+	},
+		"playcard_accelerant":{
+		"display_name":"Accelerant",
+		"energy":1,
+		"types":["Physical"],
+		"art_image":"res://Cards/Resources/PlayerCards/Art_Images/fire_mecha.jpg",
+		"description":"All 'physical' cards resolved this turn deal four more damage",
+		"effect":"res://Cards/Resources/PlayerCards/Card_Scripts/firefighter_effect.gd",
+		"card_owner":"Player",
+		"targeting_types":["all_kaiju"],
+		"targeting_num":1,
+		"script_val_1":1,
+		"script_val_2":2,
+		"deck_list": "green"
+	},
 	"playcard_glimmer":{
 		"display_name":"Glimmer",
 		"energy":1,
 		"types":["Psychic"],
 		"art_image":"res://Cards/Resources/PlayerCards/Art_Images/landscape_meditate.jpg",
 		"description":"Inspect a target kaiju deck",
+		"effect":"res://Cards/Resources/PlayerCards/Card_Scripts/firefighter_effect.gd",
+		"card_owner":"Player",
+		"targeting_types":["all_kaiju"],
+		"targeting_num":1,
+		"script_val_1":1,
+		"script_val_2":2,
+		"deck_list": "pink"
+	},
+	"playcard_mind_spy":{
+		"display_name":"Mind Spy",
+		"energy":1,
+		"types":["Psychic"],
+		"art_image":"res://Cards/Resources/PlayerCards/Art_Images/landscape_meditate.jpg",
+		"description":"Reveal the top three cards of two target kaiju decks",
 		"effect":"res://Cards/Resources/PlayerCards/Card_Scripts/firefighter_effect.gd",
 		"card_owner":"Player",
 		"targeting_types":["all_kaiju"],
@@ -57,7 +98,7 @@ const library = {
 		"script_val_1":1,
 		"script_val_2":2,
 		"deck_list": "blue"
-	},	
+	},
 		"playcard_threat_assessment":{
 		"display_name":"Threat Assessment",
 		"energy":1,
@@ -71,7 +112,7 @@ const library = {
 		"script_val_1":1,
 		"script_val_2":2,
 		"deck_list": "blue"
-	},		
+	},
 	"playcard_bore_cannon":{
 		"display_name":"Bore Cannon",
 		"energy":1,
@@ -86,12 +127,40 @@ const library = {
 		"script_val_2":2,
 		"deck_list": "red"
 	},
+		"playcard_flamethrower":{
+		"display_name":"Flamethrower",
+		"energy":2,
+		"types":["Fire"],
+		"art_image":"res://Cards/Resources/PlayerCards/Art_Images/landscape_drill.jpg",
+		"description":"Deal 4 damage to target 2 decks",
+		"effect":"res://Cards/Resources/PlayerCards/Card_Scripts/firefighter_effect.gd",
+		"card_owner":"Player",
+		"targeting_types":["all_kaiju"],
+		"targeting_num":1,
+		"script_val_1":1,
+		"script_val_2":2,
+		"deck_list": "red"
+	},
 		"playcard_echo_matrix":{
 		"display_name":"Echo Matrix",
 		"energy":0,
 		"types":["Physical"],
 		"art_image":"res://Cards/Resources/PlayerCards/Art_Images/landscape_drill.jpg",
 		"description":"Add 3 power to your pool",
+		"effect":"res://Cards/Resources/PlayerCards/Card_Scripts/firefighter_effect.gd",
+		"card_owner":"Player",
+		"targeting_types":["all_kaiju"],
+		"targeting_num":1,
+		"script_val_1":1,
+		"script_val_2":2,
+		"deck_list": "yellow"
+	},
+		"playcard_load_shedding":{
+		"display_name":"Load Shedding",
+		"energy":3,
+		"types":["Electric"],
+		"art_image":"res://Cards/Resources/PlayerCards/Art_Images/landscape_drill.jpg",
+		"description":"Deal 5 damage to target deck. If the local environment is 'water', this card costs no energy",
 		"effect":"res://Cards/Resources/PlayerCards/Card_Scripts/firefighter_effect.gd",
 		"card_owner":"Player",
 		"targeting_types":["all_kaiju"],
