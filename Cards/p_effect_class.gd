@@ -1,12 +1,13 @@
 extends Node
 
-class_name card_class
+class_name p_effect_class
 
 func on_played():
-	print("Hello from Parent")
+	print("Hello from p_effect on_play")
 	pass
 
 func on_resolve():
+	print("Hello from p_effect resolve")
 	pass
 
 func on_end():

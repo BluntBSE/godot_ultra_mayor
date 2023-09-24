@@ -8,24 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://cpxsxp2vr8kc6" path="res://addons/sprite_painter/graphics/circle_shape_2d.svg" id="4_dydgn"]
 [ext_resource type="Script" path="res://Screens/PlayMat/PlayerField.gd" id="7_0mcce"]
 [ext_resource type="Texture2D" uid="uid://c7nymhfcdr3hl" path="res://addons/sprite_painter/graphics/diags.png" id="8_max8n"]
+[ext_resource type="Script" path="res://Screens/PlayMat/p_field_collider.gd" id="9_kt2or"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgrej"]
 size = Vector2(300, 700)
-
-[sub_resource type="GDScript" id="GDScript_y3enu"]
-script/source = "extends CollisionShape2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	print(\"My size is\" + str(self.get_shape().size.y))
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
 
 [node name="CardPlayMat" type="Node2D"]
 script = ExtResource("1_ektrx")
@@ -95,9 +81,6 @@ offset_bottom = 339.0
 text = "INITIALIZE DECKS"
 
 [node name="PlayerHand" type="Node2D" parent="."]
-unique_name_in_owner = true
-z_index = 10
-z_as_relative = false
 position = Vector2(648, 755)
 script = ExtResource("4_da5cm")
 
@@ -122,7 +105,7 @@ scale = Vector2(1.06665, 1.32534)
 unique_name_in_owner = true
 position = Vector2(-1, 32)
 shape = SubResource("RectangleShape2D_lgrej")
-script = SubResource("GDScript_y3enu")
+script = ExtResource("9_kt2or")
 
 [node name="p_field_sprite" type="Polygon2D" parent="PlayerField/Area2D/p_field_collider"]
 unique_name_in_owner = true

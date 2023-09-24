@@ -5,7 +5,7 @@ var deck_list = {
 	"blue": ["playcard_threat_assessment","playcard_jujitsu","playcard_threat_assessment","playcard_predictive_modeling","playcard_threat_assessment","playcard_threat_assessment"],
 	"yellow": ["playcard_echo_matrix","playcard_echo_matrix","playcard_echo_matrix","playcard_echo_matrix","playcard_echo_matrix","playcard_echo_matrix"],
 	"pink": ["playcard_glimmer","playcard_glimmer","playcard_glimmer","playcard_glimmer","playcard_glimmer","playcard_glimmer","playcard_glimmer"],
-	"green":["playcard_hostile_architecture","playcard_hostile_architecture","playcard_firefighting","playcard_firefighting","playcard_firefighting","playcard_firefighting",]
+	"green":["playcard_emergency_irrigation","playcard_hostile_architecture","playcard_firefighting","playcard_emergency_irrigation","playcard_firefighting","playcard_firefighting",]
 }
 
 

@@ -29,22 +29,6 @@ const color_map = {
 	"green":{"text": "#9BC53D", "body": "#9BC53D"}
 }
 
-# {
-#	"pc_firefighting":{
-#		"display_name":"Firefighting",
-#		"energy":1,
-#		"types":["Physical", "Water"],
-#		"art_image":"res://Cards/Resources/PlayerCards/Art_Images/fire_mecha.jpg",
-#		"description":"Fight those fires",
-#		"effect":"res://Cards/Resources/PlayerCards/Card_Scripts/firefighter_effect.gd",
-#		"card_owner":"Player",
-#		"targeting_types":["all_kaiju"],
-#		"targeting_num":1,
-#		"script_val_1":1,
-#		"script_val_2":2,
-#		"deck_list":"red"
-#	}
-
 var state = "Hidden"
 var t = 0 # for interpolation
 var t_scale = 2 #for interpolation
@@ -55,7 +39,8 @@ var target_rotation
 var start_scale
 var target_scale
 var stored_position #When a card is hovered, remember where it came from so it can go back regardless of if it is unhovered before completing.
-
+var stored_rotation #Same for rotation
+var _hovered
 
 const states = {
 	"InHand": "InHand",
@@ -65,19 +50,22 @@ const states = {
 	"HandFocused": "HandFocused",
 	"InHandFocus": "InHandFocus",
 	"OutHandFocus": "OutHandFocus",
-	"Hidden": "Hidden"
+	"Hidden": "Hidden",
+	"Dragged": "Dragged",
+	"Targeting": "Targeting"
 }
 
 #Passes self reference during on mouse enter & exit events to the hand node.
 signal signal_self_in(p_self)
 signal signal_self_out(p_self)
+signal signal_self_dragged(p_self) #Maybe need a playmat listener to grab this...Maybe?
+signal signal_target(p_self, target)
 
 
 func init(p_card_id): ##Not _init() because we're a packed scene, not a single node.
 	self.card_id = p_card_id
 	card = library[p_card_id]
 	assign_card()
-	do_on_played(i_effect)
 	return self #Allows ...instantiate().whatever()
 
 
@@ -110,7 +98,7 @@ func assign_card():
 	%MarginColor.color = color_map[color_key]["body"]
 	%CardTypes.text= ", ".join(types)
 
-func smoother_lerp(x):
+func smoother_lerp(x): #maybe put this in a utility class
 	return ((x) * (x) * (3 - 2 * (x)))
 
 
@@ -119,15 +107,34 @@ func do_on_played(p_i_effect):
 	p_i_effect.on_played()
 
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready(): #We don't use this because newly spawned cards should have .init() called by their parents
+	pivot_offset = size/2 #If you get rotation weirdness, this is why. We're setting pivot to the middle.
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta): #added _
+func _process(delta): #Switch with match statement instead of ifs later.
+	if state == "Dragged":
+		if signal_self_out.is_connected(get_parent()._on_hover_exit):
+			#Prevent hover events from firing during drag to prevent conflicts with dragging over in play cards
+			signal_self_out.disconnect(get_parent()._on_hover_exit)
+			signal_self_in.disconnect(get_parent()._on_hover)
+		if Input.is_action_just_released("left_click"):
+			signal_self_out.connect(get_parent()._on_hover_exit)
+			signal_self_in.connect(get_parent()._on_hover)
+			signal_self_out.emit(self)
+
+
+
+	if state == "HandFocused":
+		if _hovered == true:
+			if Input.is_action_pressed("left_click"):
+				signal_self_dragged.emit(self)
+
+	if state == "Targeting":
+		pass
+
 	match state:
 		"InHand":
 			pass
@@ -145,6 +152,14 @@ func _process(delta): #added _
 		"Reorganizing":
 			pass
 		"InPlay":
+			if t <= 1: #always 1 with linear interpolation
+				position = start_pos.lerp(target_pos, smoother_lerp(t))
+				scale = start_scale.lerp(target_scale, smoother_lerp(t))
+				rotation = lerp(rotation, stored_rotation, smoother_lerp(t))
+				t += delta * t_scale
+			else:
+				position = target_pos
+				scale = target_scale
 			pass
 		"HandFocused": #Unecessary but...Whatever
 			pass
@@ -164,6 +179,7 @@ func _process(delta): #added _
 				if t <= 1: #always 1 with linear interpolation
 					position = start_pos.lerp(target_pos, smoother_lerp(t))
 					scale = start_scale.lerp(target_scale, smoother_lerp(t))
+					rotation = lerp(rotation, stored_rotation, smoother_lerp(t))
 					t += delta * t_scale
 				else:
 					position = target_pos
@@ -172,15 +188,31 @@ func _process(delta): #added _
 					state = "InHand"
 		"Hidden":
 			pass
+		"Dragged":
+				t = 0
+				var vec = get_parent().get_local_mouse_position() - self.position#This is the top left corner atm.
+				vec += Vector2(-self.size.x,-self.size.y)
+				self.rotation = 0
+				position += vec
+		"Targeting":
+				t = 0
+				var vec = get_parent().get_local_mouse_position() - self.position#This is the top left corner atm.
+				vec += Vector2(-self.size.x,-self.size.y)
+				self.rotation = 0
+				position += vec
 
 	pass
 
 
 func _on_mouse_entered():
+	_hovered = true
 	signal_self_in.emit(self)
 	pass # Replace with function body.
 
 
 func _on_mouse_exited():
+	_hovered = false
 	signal_self_out.emit(self)
 	pass # Replace with function body.
+
+

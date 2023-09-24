@@ -1,0 +1,2 @@
+Maybe hand and playspaces each need to listen to a singleton accepting any global scripts or modifiers. Is it excess to do on update?
+Maybe do it on draw and play.

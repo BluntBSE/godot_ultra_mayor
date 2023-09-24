@@ -29,6 +29,20 @@ const library = {
 		"script_val_2":2,
 		"deck_list": "green"
 	},
+		"playcard_emergency_irrigation":{
+		"display_name":"Emergency Irrigation",
+		"energy":1,
+		"types":["Physical"],
+		"art_image":"res://Cards/Resources/PlayerCards/Art_Images/fire_mecha.jpg",
+		"description":"Add 'water' to the local terrain types, and remove 'fire', when this card is played.",
+		"effect":"res://Cards/Resources/PlayerCards/Card_Scripts/firefighter_effect.gd",
+		"card_owner":"Player",
+		"targeting_types":["all_kaiju"],
+		"targeting_num":1,
+		"script_val_1":1,
+		"script_val_2":2,
+		"deck_list": "green"
+	},
 		"playcard_accelerant":{
 		"display_name":"Accelerant",
 		"energy":1,
@@ -146,7 +160,7 @@ const library = {
 		"energy":0,
 		"types":["Physical"],
 		"art_image":"res://Cards/Resources/PlayerCards/Art_Images/landscape_drill.jpg",
-		"description":"Add 3 power to your pool",
+		"description":"When this card is played, asdd 3 power to your pool",
 		"effect":"res://Cards/Resources/PlayerCards/Card_Scripts/firefighter_effect.gd",
 		"card_owner":"Player",
 		"targeting_types":["all_kaiju"],
