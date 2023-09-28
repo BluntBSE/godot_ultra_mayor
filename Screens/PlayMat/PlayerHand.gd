@@ -15,14 +15,14 @@ signal card_being_dragged(card)
 
 
 func _on_drag(card):
-	print("Firing on drag of " + card.card_name)
+	#print("Firing on drag of " + card.card_name)
 	if card.state == "HandFocused":
 		card.state = "Dragged"
 
 func _on_hover(card):
-	print("Firing on hover of " + card.card_name)
+	#print("Firing on hover of " + card.card_name)
 	if card.state == "InHand":
-		print("Firing on hover2")
+		#print("Firing on hover2")
 		focused_card = card
 		card.start_pos = card.position
 		card.target_pos = card.start_pos+Vector2(0,-300)
@@ -31,7 +31,7 @@ func _on_hover(card):
 		card.state = card.states["InHandFocus"]
 
 func _on_hover_exit(card):
-	print("Firing on hover_exit of " + card.card_name)
+	#print("Firing on hover_exit of " + card.card_name)
 	if card.state == "InHandFocus" or card.state == "HandFocused" or card.state == "Dragged":
 		#If there's no drag_target on the parent...
 		if get_parent().drag_target == null:
