@@ -105,6 +105,7 @@ script = ExtResource("4_da5cm")
 texture = ExtResource("4_dydgn")
 
 [node name="PlayerField" type="Node2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(444, 344)
 script = ExtResource("7_0mcce")
 

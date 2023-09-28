@@ -31,7 +31,7 @@ const color_map = {
 
 var state = "Hidden"
 var t = 0 # for interpolation
-var t_scale = 2 #for interpolation
+var t_scale = 4 #for interpolation
 var start_pos
 var target_pos
 var start_rotation = rotation
@@ -46,7 +46,11 @@ const states = {
 	"InHand": "InHand",
 	"MovingToHand": "MovingToHand",
 	"Reorganizing": "Reorganizing",
+	"EnteringPlay": "EnteringPlay",
 	"InPlay": "InPlay",
+	"InInPlayFocus": "InInPlayFocus",
+	"InPlayFocused": "InPlayFocused",
+	"OutInPlayFocus": "OutInPlayFocus",
 	"HandFocused": "HandFocused",
 	"InHandFocus": "InHandFocus",
 	"OutHandFocus": "OutHandFocus",
@@ -152,6 +156,8 @@ func _process(delta): #Switch with match statement instead of ifs later.
 		"Reorganizing":
 			pass
 		"InPlay":
+			pass
+		"EnteringPlay":
 			if t <= 1: #always 1 with linear interpolation
 				position = start_pos.lerp(target_pos, smoother_lerp(t))
 				scale = start_scale.lerp(target_scale, smoother_lerp(t))
@@ -160,7 +166,32 @@ func _process(delta): #Switch with match statement instead of ifs later.
 			else:
 				position = target_pos
 				scale = target_scale
+				state = "InPlay"
+				t = 0
 			pass
+		"InInPlayFocus":
+			if t <= 1: #always 1 with linear interpolation
+				position = start_pos.lerp(target_pos, t)
+				scale = start_scale.lerp(target_scale, t)
+				t += delta * t_scale
+			else:
+				position = target_pos
+				scale = target_scale
+				t = 0
+				state = "InPlayFocused"
+		"InPlayFocused":
+			pass
+		"OutInPlayFocus":
+				if t <= 1: #always 1 with linear interpolation
+					position = start_pos.lerp(target_pos, smoother_lerp(t))
+					scale = start_scale.lerp(target_scale, smoother_lerp(t))
+					rotation = lerp(rotation, stored_rotation, smoother_lerp(t))
+					t += delta * t_scale
+				else:
+					position = target_pos
+					scale = target_scale
+					t = 0
+					state = "InPlay"
 		"HandFocused": #Unecessary but...Whatever
 			pass
 		"InHandFocus":

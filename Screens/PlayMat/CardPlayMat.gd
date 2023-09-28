@@ -30,6 +30,7 @@ func find_drag_targets():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 
+#Handles the drag of cards from the hand into the playfield
 	if dragged_card != null:
 		if drag_target != null:
 			if drag_target == player_field:
@@ -37,6 +38,7 @@ func _process(delta):
 					var card_parent = dragged_card.get_parent()
 					card_parent.remove_child(dragged_card)
 					drag_target.add_child(dragged_card) #If we're dragging to the playfield after all. This all needs to be reworked.
+					drag_target.acquire_card(dragged_card)
 					dragged_card.start_pos = drag_target.get_local_mouse_position()
 					drag_target.cards_in_play.append(dragged_card)
 					var num_in_play = drag_target.cards_in_play.size()
@@ -45,13 +47,17 @@ func _process(delta):
 					dragged_card.stored_rotation = deg_to_rad(90)
 					dragged_card.start_scale = dragged_card.scale
 					dragged_card.target_scale = Vector2(1,1)
-					#Disconnects the hovering events that are present in the hand...But may not be necessary.
+					#Disconnects the hovering events that are present in the hand...
 					if ( dragged_card.signal_self_in.is_connected(%PlayerHand._on_hover) ):
 						dragged_card.signal_self_in.disconnect(%PlayerHand._on_hover)
 					if ( dragged_card.signal_self_out.is_connected(%PlayerHand._on_hover_exit) ):
 						dragged_card.signal_self_out.disconnect(%PlayerHand._on_hover_exit)
 
-					dragged_card.state = dragged_card.states["InPlay"] #I actually need to check what state the card is in when we start this for assigning targets, but this works for now
+					#And connects them to the PlayerField, which handles ability assignment and targeting.
+					dragged_card.signal_self_in.connect(%PlayerField._on_hover)
+					dragged_card.signal_self_out.connect(%PlayerField._on_hover_exit)
+
+					dragged_card.state = dragged_card.states["EnteringPlay"] #I actually need to check what state the card is in when we start this for assigning targets, but this works for now
 					dragged_card = null
 
 	pass

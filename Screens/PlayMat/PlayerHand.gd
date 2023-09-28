@@ -25,7 +25,7 @@ func _on_hover(card):
 		#print("Firing on hover2")
 		focused_card = card
 		card.start_pos = card.position
-		card.target_pos = card.start_pos+Vector2(0,-300)
+		card.target_pos = card.start_pos+Vector2(0,-200)
 		card.start_scale = card.scale
 		card.target_scale = focus_scale
 		card.state = card.states["InHandFocus"]
