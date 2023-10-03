@@ -1,17 +1,19 @@
 extends p_effect_class
 
 func on_played(args):
-	print("Hello from Firefighter on_play")
-	super.on_played(args)#parent super call is necessary to execute any parent code.
+	print("Hello from a card revealing instant")
+	super.deduct_energy(args["energy"])
+	print(args["script_val_1"])
+	#super.on_played(args)#parent super call is necessary to execute any parent code.
 	pass
 
 func on_resolve(args):
 	print("Hello from firefighter resolution")
-	super.on_resolve(args)
+	#super.on_resolve(args)
 	pass
 
 func on_return(args):
-	super.on_return(args)
+	#super.on_return(args)
 	pass
 
 

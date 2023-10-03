@@ -1,15 +1,17 @@
 extends Node2D
 var cards_in_play = [] #array of cards in play
 var drag_target = true
-#An array of anonymous dictionaries that look like
+#Actoin queues: An array of anonymous dictionaries that look like
 
 #{"origin":<cardNode> "targets":[node,node]}
 var p_action_queue = []
 var k_action_queue = []
 var focused_card #Card mouse is hovering over.
-var base_scale = Vector2(1.0,1.0) #How much cards in play should be shrunk, if at all
+var base_scale = Vector2(0.75,0.75) #How much cards in play should be shrunk, if at all
 var focus_scale = Vector2(1.5,1.5) #How much to zoom, if at all, any card being highlighted
 #May ultimately want to replace a scale-up approach with a little mini-card that shows the card details off a smaller t
+var avail_energy = 3
+
 
 func acquire_card(card): #assign base scale to cards
 	pass
@@ -22,8 +24,8 @@ func _on_drag(card):
 func _on_hover(card):
 	#print("Firing on hover of " + card.card_name)
 	if card.state == "InPlay":
-		#print("Firing on hover2")
 		focused_card = card
+		#print("Firing on hover2")
 		card.stored_position = card.position
 		card.start_pos = card.position
 		card.target_pos = card.start_pos+Vector2(150, 0)

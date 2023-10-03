@@ -1,7 +1,7 @@
 extends p_effect_class
 
 func on_played(args):
-	print("Hello from Firefighter on_play")
+	print("Hello from a terrain modifying card")
 	super.on_played(args)#parent super call is necessary to execute any parent code.
 	pass
 

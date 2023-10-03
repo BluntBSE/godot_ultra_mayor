@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1qcwf2q7ftam"]
+[gd_scene load_steps=5 format=3 uid="uid://br4at54e3ye3v"]
 
-[ext_resource type="Script" path="res://Cards/playcard_template.gd" id="1_7t8j6"]
-[ext_resource type="Texture2D" uid="uid://dnbgwbfqnlequ" path="res://Cards/Resources/PlayerCards/Backgrounds/texture_one.png" id="2_1r0ui"]
-[ext_resource type="Texture2D" uid="uid://bvwwu75vr3pb6" path="res://Cards/Resources/PlayerCards/Art_Images/landscape_artbot.jpg" id="3_xdc5x"]
-[ext_resource type="Script" path="res://Cards/MarginColor.gd" id="4_56ci6"]
+[ext_resource type="Script" path="res://Cards/playcard_template.gd" id="1_v0m80"]
+[ext_resource type="Texture2D" uid="uid://dnbgwbfqnlequ" path="res://Cards/Resources/PlayerCards/Backgrounds/texture_one.png" id="2_c0tub"]
+[ext_resource type="Texture2D" uid="uid://bvwwu75vr3pb6" path="res://Cards/Resources/PlayerCards/Art_Images/landscape_artbot.jpg" id="3_k8aja"]
+[ext_resource type="Script" path="res://Cards/MarginColor.gd" id="4_ywdhi"]
 
 [node name="playcard_template" type="MarginContainer"]
 custom_minimum_size = Vector2(200, 280)
@@ -13,7 +13,7 @@ anchor_bottom = 0.278
 offset_right = 0.719986
 offset_bottom = -0.240021
 mouse_filter = 0
-script = ExtResource("1_7t8j6")
+script = ExtResource("1_v0m80")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -36,7 +36,7 @@ self_modulate = Color(0.14902, 0.14902, 0.14902, 1)
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("2_1r0ui")
+texture = ExtResource("2_c0tub")
 expand_mode = 2
 
 [node name="CardName" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TextureRect"]
@@ -69,7 +69,7 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
-texture = ExtResource("3_xdc5x")
+texture = ExtResource("3_k8aja")
 expand_mode = 2
 
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer"]
@@ -77,7 +77,7 @@ self_modulate = Color(0.14902, 0.14902, 0.14902, 1)
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("2_1r0ui")
+texture = ExtResource("2_c0tub")
 expand_mode = 2
 
 [node name="CardTypes" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TextureRect2"]
@@ -122,7 +122,7 @@ show_behind_parent = true
 layout_mode = 2
 mouse_filter = 2
 color = Color(0.454902, 0.662745, 0.662745, 1)
-script = ExtResource("4_56ci6")
+script = ExtResource("4_ywdhi")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

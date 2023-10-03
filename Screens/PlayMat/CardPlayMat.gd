@@ -42,11 +42,11 @@ func _process(delta):
 					dragged_card.start_pos = drag_target.get_local_mouse_position()
 					drag_target.cards_in_play.append(dragged_card)
 					var num_in_play = drag_target.cards_in_play.size()
-
-					dragged_card.target_pos = Vector2(0,player_field_dimensions.y - 150 - (250*num_in_play)) #This is relative to CardPlayMat.
+					var field_spacing = (dragged_card.size.x * drag_target.base_scale.x) + 15
+					dragged_card.target_pos = Vector2(0,player_field_dimensions.y - 150 - (field_spacing*num_in_play)) #This is relative to CardPlayMat.
 					dragged_card.stored_rotation = deg_to_rad(90)
 					dragged_card.start_scale = dragged_card.scale
-					dragged_card.target_scale = Vector2(1,1)
+					dragged_card.target_scale = drag_target.base_scale
 					#Disconnects the hovering events that are present in the hand...
 					if ( dragged_card.signal_self_in.is_connected(%PlayerHand._on_hover) ):
 						dragged_card.signal_self_in.disconnect(%PlayerHand._on_hover)
@@ -56,7 +56,15 @@ func _process(delta):
 					#And connects them to the PlayerField, which handles ability assignment and targeting.
 					dragged_card.signal_self_in.connect(%PlayerField._on_hover)
 					dragged_card.signal_self_out.connect(%PlayerField._on_hover_exit)
-
+					#Check here if the card is an 'instant' type card. If so, its script must run immediately, its power must be deducted, and it must be removed from the game instead of entering play.
+					if dragged_card.instant == true:
+						print("You tried to play an instant!")
+						%PlayerField.avail_energy -= dragged_card.energy
+						dragged_card.do_on_played()
+						dragged_card.queue_free()
+						#Tell the player hand to reorganize itself.
+						#reorganize()
+						return
 					dragged_card.state = dragged_card.states["EnteringPlay"] #I actually need to check what state the card is in when we start this for assigning targets, but this works for now
 					dragged_card = null
 

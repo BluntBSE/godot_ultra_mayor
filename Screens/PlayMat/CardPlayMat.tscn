@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bs40m1kungf3d"]
+[gd_scene load_steps=12 format=3 uid="uid://bs40m1kungf3d"]
 
 [ext_resource type="Script" path="res://Screens/PlayMat/CardPlayMat.gd" id="1_ektrx"]
 [ext_resource type="Texture2D" uid="uid://djaidhcglakb5" path="res://Cards/Resources/Backgrounds/landscape_dark.jpg" id="1_vilpx"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cpxsxp2vr8kc6" path="res://addons/sprite_painter/graphics/circle_shape_2d.svg" id="4_dydgn"]
 [ext_resource type="Script" path="res://Screens/PlayMat/PlayerField.gd" id="7_0mcce"]
 [ext_resource type="Texture2D" uid="uid://c7nymhfcdr3hl" path="res://addons/sprite_painter/graphics/diags.png" id="8_max8n"]
+[ext_resource type="Script" path="res://Screens/PlayMat/PlayerPower.gd" id="9_1dydi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgrej"]
 size = Vector2(300, 700)
@@ -39,19 +40,20 @@ script = ExtResource("2_iocyt")
 [node name="PublicWorks" type="Button" parent="."]
 unique_name_in_owner = true
 modulate = Color(0.0588235, 1, 0.0705882, 1)
-offset_left = 1.0
-offset_top = -3.0
-offset_right = 107.0
-offset_bottom = 28.0
+offset_left = 88.0
+offset_top = 433.0
+offset_right = 196.0
+offset_bottom = 464.0
 text = "Public Works"
 script = ExtResource("3_i1dto")
 _deck_list = "green"
 
 [node name="Safety" type="Button" parent="."]
 modulate = Color(1, 0.0941176, 0.0862745, 1)
-offset_top = 47.0
-offset_right = 106.0
-offset_bottom = 78.0
+offset_left = 85.0
+offset_top = 511.0
+offset_right = 192.0
+offset_bottom = 542.0
 text = "Public Safety
 "
 script = ExtResource("3_i1dto")
@@ -59,18 +61,20 @@ _deck_list = "red"
 
 [node name="Information" type="Button" parent="."]
 modulate = Color(0.0509804, 1, 1, 1)
-offset_top = 103.0
-offset_right = 106.0
-offset_bottom = 134.0
+offset_left = 81.0
+offset_top = 586.0
+offset_right = 187.0
+offset_bottom = 617.0
 text = "Information"
 script = ExtResource("3_i1dto")
 _deck_list = "blue"
 
 [node name="Health" type="Button" parent="."]
 modulate = Color(1, 0.0666667, 1, 1)
-offset_top = 166.0
-offset_right = 106.0
-offset_bottom = 197.0
+offset_left = 83.0
+offset_top = 659.0
+offset_right = 189.0
+offset_bottom = 690.0
 text = "Health
 "
 script = ExtResource("3_i1dto")
@@ -78,21 +82,57 @@ _deck_list = "pink"
 
 [node name="Energy" type="Button" parent="."]
 modulate = Color(1, 1, 0.188235, 1)
-offset_top = 232.0
-offset_right = 106.0
-offset_bottom = 263.0
+offset_left = 81.0
+offset_top = 730.0
+offset_right = 187.0
+offset_bottom = 761.0
 text = "Energy
 "
 script = ExtResource("3_i1dto")
 _deck_list = "yellow"
 
+[node name="ULTRA" type="Button" parent="."]
+modulate = Color(0.85098, 0.992157, 0.988235, 1)
+offset_left = 91.0
+offset_top = 374.0
+offset_right = 197.0
+offset_bottom = 405.0
+text = "ULTRA"
+script = ExtResource("3_i1dto")
+_deck_list = "yellow"
+
 [node name="Initialize" type="Button" parent="."]
 modulate = Color(1, 0.996078, 0.992157, 1)
-offset_left = -1.0
-offset_top = 308.0
-offset_right = 140.0
-offset_bottom = 339.0
-text = "INITIALIZE DECKS"
+offset_left = 941.0
+offset_top = 21.0
+offset_right = 1082.0
+offset_bottom = 52.0
+text = "Play Kaiju Cards
+"
+
+[node name="Assign Targets" type="Button" parent="."]
+modulate = Color(1, 0.996078, 0.992157, 1)
+offset_left = 1095.0
+offset_top = 20.0
+offset_right = 1236.0
+offset_bottom = 51.0
+text = "Assign Targets"
+
+[node name="Assign Targets2" type="Button" parent="."]
+modulate = Color(1, 0.996078, 0.992157, 1)
+offset_left = 783.0
+offset_top = 23.0
+offset_right = 924.0
+offset_bottom = 54.0
+text = "Resolve Player"
+
+[node name="Assign Targets3" type="Button" parent="."]
+modulate = Color(1, 0.996078, 0.992157, 1)
+offset_left = 1245.0
+offset_top = 20.0
+offset_right = 1386.0
+offset_bottom = 51.0
+text = "Resolve Kaiju"
 
 [node name="PlayerHand" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -131,6 +171,85 @@ visible = false
 position = Vector2(1, -32)
 color = Color(0.8, 0.94902, 0.898039, 0.0941176)
 polygon = PackedVector2Array(-152, -316, 149, -318, 148, 382, -152, 382)
+
+[node name="KaijuHead" type="Button" parent="."]
+modulate = Color(1, 1, 0.188235, 1)
+offset_left = 1699.0
+offset_top = 413.0
+offset_right = 1805.0
+offset_bottom = 444.0
+text = "Kaiju Head"
+script = ExtResource("3_i1dto")
+_deck_list = "yellow"
+
+[node name="KaijuBody" type="Button" parent="."]
+modulate = Color(1, 1, 0.188235, 1)
+offset_left = 1699.0
+offset_top = 466.0
+offset_right = 1805.0
+offset_bottom = 497.0
+text = "Kaiju Body"
+script = ExtResource("3_i1dto")
+_deck_list = "yellow"
+
+[node name="KaijuWings" type="Button" parent="."]
+modulate = Color(1, 1, 0.188235, 1)
+offset_left = 1699.0
+offset_top = 526.0
+offset_right = 1805.0
+offset_bottom = 557.0
+text = "Kaiju Wings"
+script = ExtResource("3_i1dto")
+_deck_list = "yellow"
+
+[node name="KaijuTail" type="Button" parent="."]
+modulate = Color(1, 1, 0.188235, 1)
+offset_left = 1699.0
+offset_top = 583.0
+offset_right = 1805.0
+offset_bottom = 614.0
+text = "KaijuTail
+"
+script = ExtResource("3_i1dto")
+_deck_list = "yellow"
+
+[node name="KaijuArms" type="Button" parent="."]
+modulate = Color(1, 1, 0.188235, 1)
+offset_left = 1699.0
+offset_top = 632.0
+offset_right = 1805.0
+offset_bottom = 663.0
+text = "KaijuArms
+"
+script = ExtResource("3_i1dto")
+_deck_list = "yellow"
+
+[node name="PlayerPower" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Available Power: 0"
+script = ExtResource("9_1dydi")
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 3.0
+offset_top = 34.0
+offset_right = 144.0
+offset_bottom = 60.0
+text = "Terrain Modifiers:"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 973.0
+offset_top = 81.0
+offset_right = 1114.0
+offset_bottom = 107.0
+text = "Current Phase: Player"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 3.0
+offset_top = 68.0
+offset_right = 144.0
+offset_bottom = 94.0
+text = "Default"
 
 [connection signal="mouse_entered" from="PlayerField/Area2D" to="." method="_on_playerfield_mouse_entered"]
 [connection signal="mouse_exited" from="PlayerField/Area2D" to="." method="_on_playerfield_mouse_exit"]
