@@ -1,5 +1,5 @@
 extends Node #Do I even need to extend Node?
-#class_name card_library
+#class_name PlayCardLibrary through autoload singleton
 const library = {
 	"playcard_firefighting":{
 		"display_name":"Firefighting",

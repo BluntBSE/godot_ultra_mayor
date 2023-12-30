@@ -1,0 +1,7 @@
+1.Create a method for randomly generating the Kaiju decks.
+2. Create a method for allowing cards to target each other while in play.
+3. Create an action queue that executes card actions in order.
+4. The card steps are:
+		Instant (consumed once played, used for scry-type cards or those with immediate, irreversile effects)
+		On play(these produce modifiers  that immediately impact the game, but which can be 'taken back')
+		On resolve (once cards have been committed)

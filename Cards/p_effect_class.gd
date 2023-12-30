@@ -18,8 +18,7 @@ func on_end(args: Dictionary):
 	pass
 
 func deduct_energy(cost):
-	var field = get_tree()
-	print(field)
+	pass
 	#TODO: How to find any node named "playerfield" and access its energy cost...Honestly ist hat even apprpriate.
 	#var node = field.get_root()
 	#print (node)

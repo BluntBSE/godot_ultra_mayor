@@ -1,11 +1,7 @@
 extends Node2D
 var cards_in_play = [] #array of cards in play
 var drag_target = true
-#Actoin queues: An array of anonymous dictionaries that look like
 
-#{"origin":<cardNode> "targets":[node,node]}
-var p_action_queue = []
-var k_action_queue = []
 var focused_card #Card mouse is hovering over.
 var base_scale = Vector2(0.75,0.75) #How much cards in play should be shrunk, if at all
 var focus_scale = Vector2(1.5,1.5) #How much to zoom, if at all, any card being highlighted

@@ -16,8 +16,9 @@ config/features=PackedStringArray("4.1", "Forward Plus")
 
 [autoload]
 
-CardLibrary="*res://Cards/Resources/PlayerCards/card_library.gd"
+PlayCardLibrary="*res://Cards/Resources/PlayerCards/card_library.gd"
 DeckList="*res://Screens/PlayMat/deck_list.gd"
+KaijuLibrary="*res://Cards/KaijuCards/kaiju_library.gd"
 
 [display]
 
@@ -26,7 +27,7 @@ window/size/viewport_height=1080
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/sprite_painter/plugin.cfg")
+enabled=PackedStringArray("res://addons/script-name-on-top/plugin.cfg", "res://addons/sprite_painter/plugin.cfg")
 
 [input]
 

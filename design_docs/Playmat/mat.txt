@@ -1,0 +1,13 @@
+When a battle occurs, the player enters the field with a number of decks equal to the number of pilots who acquired
+
+Players have an energy total that is modified by the pilots in play, and by some cards that are played.
+
+The cycle of play is:
+	(Will the first round be different?)
+	1. Kaiju cards are played from the Kaiju decks and visible targets are assigned.
+	2. The player places cards onto the mat (which can also be instants) and assigns targets. Resolutions occur in order of:
+		On play - Kaiju (The presence of these cards affects the environment while they're on the bench')
+		Instant (Card is consumed, can't be taken back)
+		On play (Affects the environment when placed on the mat, but can be put back to hand)
+		On resolve - Player (When the player ends their turn,  player cards do things first)
+		On resolve - Kaiju (Finally, Kaiju effects affect whatever they are currently targeting.)

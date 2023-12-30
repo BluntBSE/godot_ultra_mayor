@@ -4,10 +4,15 @@ var terrain_types = ["powered", "city"]
 var player_field
 var player_field_dimensions
 var player_hand
+var kaiju_field
+var kaiju_field_dimensions
 var dragged_card = null
 var target_available = false
 var drag_target
 
+#{"origin":<cardNode> "targets":[node,node]}
+var p_action_queue = []
+var k_action_queue = []
 
 func _on_dragged(card):
 	print("I, the mat, am aware that a card is being dragged. It is: " + str(card.card_name))
@@ -20,6 +25,8 @@ func _ready():
 	player_field = get_node("PlayerField")
 	player_hand = get_node("PlayerHand")
 	player_field_dimensions = %p_field_collider.get_shape().size
+	kaiju_field = get_node("KaijuField")
+	#kaiju_field_dimensions = %k_field_collider.get_shape().size
 	pass # Replace with function body.
 
 func find_drag_targets():
@@ -75,11 +82,20 @@ func _process(delta):
 
 func _on_playerfield_mouse_entered():
 	drag_target = player_field
-	get_node("PlayerField/Area2D/p_field_collider/p_field_sprite").visible = true
+	get_node("PlayerField/p_Area2D/p_field_collider/p_field_sprite").visible = true
 
 
 func _on_playerfield_mouse_exit():
 	drag_target = null
-	get_node("PlayerField/Area2D/p_field_collider/p_field_sprite").visible = false
+	get_node("PlayerField/p_Area2D/p_field_collider/p_field_sprite").visible = false
+
+func _on_kaijufield_mouse_entered():
+	drag_target = kaiju_field
+	get_node("KaijuField/k_Area2D/k_field_collider/k_field_sprite").visible = true
+
+
+func _on_kaijufield_mouse_exit():
+	drag_target = null
+	get_node("KaijuField/k_Area2D/k_field_collider/k_field_sprite").visible = false
 
 

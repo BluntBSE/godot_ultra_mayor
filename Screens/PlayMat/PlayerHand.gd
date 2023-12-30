@@ -10,8 +10,12 @@ var target_position = Vector2(hand_rad_1*cos(target_angle),-(hand_rad_2*sin(targ
 var focused_card
 var focus_scale = Vector2(1.5, 1.5)
 var base_scale = Vector2(1,1)
+var player_library = PlayCardLibrary.library
 
 signal card_being_dragged(card)
+
+func reorganize_hand():
+	pass
 
 
 func _on_drag(card):
@@ -63,7 +67,7 @@ func _on_draw_source(card_id, origin):
 
 	#add card to Cards in Hand
 	#Spawn the card_id passed in
-	var spawned_card =  preload("res://Cards/playcard_template.tscn").instantiate().init(card_id)
+	var spawned_card =  preload("res://Cards/playcard_template.tscn").instantiate().init(card_id,player_library)
 	self.add_child(spawned_card)
 	cih.append(spawned_card)
 	#Attach state/transformation events from the card just drawn to the hand. This doesn't trigger them. Enables animations.
