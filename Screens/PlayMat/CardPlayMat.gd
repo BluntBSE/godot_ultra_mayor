@@ -46,6 +46,8 @@ func _process(delta):
 					card_parent.remove_child(dragged_card)
 					drag_target.add_child(dragged_card) #If we're dragging to the playfield after all. This all needs to be reworked.
 					drag_target.acquire_card(dragged_card)
+					player_hand.cih.erase(dragged_card)
+					player_hand.refresh_hand() #Rearrange cards to fill in any gaps. 31
 					dragged_card.start_pos = drag_target.get_local_mouse_position()
 					drag_target.cards_in_play.append(dragged_card)
 					var num_in_play = drag_target.cards_in_play.size()
