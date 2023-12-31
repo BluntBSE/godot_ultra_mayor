@@ -5,7 +5,7 @@ var viewport_height = ProjectSettings.get_setting("display/window/size/viewport_
 var mc_ray #mouse raycast
 var hand_rad_1 = 600.00
 var hand_rad_2 = 200.00
-var target_angle = deg_to_rad(45)
+var target_angle = deg_to_rad(60)
 var target_position = Vector2(hand_rad_1*cos(target_angle),-(hand_rad_2*sin(target_angle)))
 var focused_card
 var focus_scale = Vector2(1.5, 1.5)
@@ -39,13 +39,13 @@ func _on_hover_exit(card):
 	if card.state == "InHandFocus" or card.state == "HandFocused" or card.state == "Dragged":
 		#If there's no drag_target on the parent...
 		if get_parent().drag_target == null:
-			print("Firing on hover_exit2")#Allow exiting whether or not the animati
+			print("Firing on hover_exit2")#Allow exiting whether or not the animation [[is finished??]
 			card.t = 0 #Reset animation clock?
 			card.start_pos = card.position
 			card.target_pos = card.stored_position
 			card.start_scale = card.scale
 			card.target_scale = base_scale
-			card.state = card.states["OutHandFocus"] #found u
+			card.state = card.states["OutHandFocus"]
 
 
 func _on_click(card):
@@ -62,6 +62,9 @@ func _on_click_release(card):
 	pass
 
 func _on_draw_source(card_id, origin):
+	print(cih.size())
+	if cih.size() > 7:
+		return
 	target_position = Vector2(hand_rad_1*cos(target_angle),-(hand_rad_2*sin(target_angle)))
 
 
@@ -78,40 +81,42 @@ func _on_draw_source(card_id, origin):
 	spawned_card.stored_position = target_position
 	spawned_card.target_pos = target_position
 	spawned_card.state = spawned_card.states["MovingToHand"]
-	spawned_card.target_rotation = (deg_to_rad((90)) - target_angle)*.25
+	spawned_card.target_rotation = (deg_to_rad((90)) - target_angle)*.25 #Probably deleting this as we implement refresh_hand
 	spawned_card.stored_rotation = spawned_card.target_rotation
 	target_angle += 0.25
-	#maybe the playmat needs to become aware of the "Dragged" event here, too.
 	var playmat = get_parent()
 	spawned_card.signal_self_dragged.connect(playmat._on_dragged)
 
-	#refresh_hand()
 	return spawned_card
 
+#Maybe it should be like...
+#Redraw hand...
+#Teleport card to the source immediately
+#Slide it back into the redrawn target position
+func refresh_hand():
+	print("refresh_hand()")
+	#Resets target angle in the hand (not rotation).
+	#(deg_to_rad((90)) - target_angle)*.25 is a nice angle off to the side.
+	#The first target_angle should probably be determined by the number of cards in hand actually. So that 1 card is straight up.
+	target_angle = (deg_to_rad(60))
+	target_position = Vector2(hand_rad_1*cos(target_angle),-(hand_rad_2*sin(target_angle)))
+	for card in cih:
+		card.start_pos = card.position
+		card.stored_position = target_position
+		card.target_pos = target_position
+		card.target_rotation = (deg_to_rad((90)) - target_angle)*.25
+		card.stored_rotation = (deg_to_rad((90)) - target_angle)*.25
+		card.state = card.states["MovingToHand"] #May switch to the "Reorganizing" state
+		target_angle += 0.25
+		target_position = Vector2(hand_rad_1*cos(target_angle),-(hand_rad_2*sin(target_angle)))
+	
+		
+		
+		
+		
 
 
 
-
-func refresh_hand(): #Idk about this one
-	var angle = deg_to_rad(90)
-
-	#Iterate through all child nodes of the hand and count them.
-	var cards = self.get_children()
-
-	cards.erase(get_node("_hand_reference"))
-	#Hide and set to same position as parent.
-	for child in cards:
-
-		child.position = Vector2(0,0)
-
-	for child in cards:
-		var oval_vector = Vector2(hand_rad_1*cos(angle),-(hand_rad_2*sin(angle)))
-		child.position += oval_vector
-		angle += 0.25 #This should be calculated based on the number of cards in the hand.
-
-
-
-	pass #Call this when a card is drawn. Change up the positions of the cards and add the newest one to it.
 
 
 # Called when the node enters the scene tree for the first time.
@@ -119,6 +124,7 @@ func _ready():
 	#Search for all nodes with a _deck_list property and register them to the hand as possible draw sources
 	if get_parent() != null:
 		var children = get_parent().get_children()
+		print(children)
 		for i in range(children.size()):
 			if (children[i].get("_deck_list")):
 				children[i].draw_source.connect(_on_draw_source)

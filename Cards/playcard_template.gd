@@ -109,7 +109,7 @@ func assign_card():
 func smoother_lerp(x): #maybe put this in a utility class
 	return ((x) * (x) * (3 - 2 * (x)))
 
-
+ 
 func do_on_played():
 	print(i_effect)
 	i_effect.on_played({"energy": energy, "script_val_1": script_val_1, "script_val_2": script_val_2})
