@@ -44,12 +44,13 @@ func _process(delta):
 				if Input.is_action_just_released("left_click"): #Dragged card to Player Field
 					print("Confirmed you attempted to drag into the player field")
 					%PlayerField.add_card(dragged_card)
+					%PlayerField.refresh_field()
 					#Check here if the card is an 'instant' type card. If so, its script must run immediately, its power must be deducted, and it must be removed from the game instead of entering play.
 					if dragged_card.instant == true:
 						print("You tried to play an instant!")
-						%PlayerField.avail_energy -= dragged_card.energy
-						dragged_card.do_on_played()
-						dragged_card.queue_free()
+						#%PlayerField.avail_energy -= dragged_card.energy
+						#dragged_card.do_on_played()
+						#dragged_card.queue_free()
 
 						return
 					dragged_card.state = dragged_card.states["EnteringPlay"] #I actually need to check what state the card is in when we start this for assigning targets, but this works for now

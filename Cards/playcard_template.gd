@@ -149,11 +149,13 @@ func _process(delta): #Switch with match statement instead of ifs later.
 		"MovingToHand":
 			if t <= 1: #always 1 with linear interpolation
 				position = start_pos.lerp(target_pos, smoother_lerp(t))
+				scale = start_scale.lerp(target_scale, smoother_lerp(t))
 				rotation = lerp(start_rotation, target_rotation,smoother_lerp(t))
 				t += delta * t_scale
 			else:
 				position = target_pos
 				rotation = target_rotation
+				scale = target_scale
 				state = "InHand"
 				t = 0 #Just in case.See if this causes animation problems later though.
 			pass

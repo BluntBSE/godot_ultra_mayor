@@ -57,15 +57,12 @@ func _on_click(card):
 
 func _on_release(card):
 		if dragging == true:
-			pass
+			unplay_card(card)
 		if dragging == false:
 			print("Return this card to the hand")
-			print(card)
-			self.remove_child(card)
-			cards_in_play.erase(card)
-			%PlayerHand.add_child(card)
-			%PlayerHand.cih.append(card)
-			%PlayerHand.refresh_hand()
+			print(card.card_name)
+			unplay_card(card)
+			click_target = null
 			
 			pass
 		
@@ -101,23 +98,42 @@ func add_card(card):
 	
 func refresh_field():
 	print("Refreshing the field")
+	var card_index = cards_in_play.size()
 	for card in cards_in_play:
-		var card_position = cards_in_play.size()
+		print(card.card_name)
+
 		var field_spacing = (card.size.x * base_scale.x) + 15
 		var y_offset = 50 #Pixels from the bottom of the Y target.
 		var local_dimensions = (%p_field_collider.get_shape().size)
-		var target_y = (local_dimensions.y - y_offset) - (card_position * field_spacing)
+		var target_y = (local_dimensions.y - y_offset) - (150*card_index)
+		print("target_y is" + str(target_y))
 		card.target_pos = Vector2(0, target_y)
 		card.stored_rotation = deg_to_rad(90)
+		card.target_rotation = deg_to_rad(90)
 		card.start_scale = card.scale
 		card.target_scale = base_scale
+		card.state = card.states["EnteringPlay"]
+		card_index -= 1
+
 		
 func unplay_card(card):
-	self.remove_child(card)
-	cards_in_play.erase(card)
-	%PlayerHand.add_child(card)
-	%PlayerHand.cih.append(card)
-	%PlayerHand.refresh_hand()
+			self.remove_child(card)
+			cards_in_play.erase(card)
+			%PlayerHand.add_child(card)
+			%PlayerHand.cih.append(card)
+			hovered_player_card = null
+			card.state = card.states["MovingToHand"]
+	
+			if ( card.signal_self_in.is_connected(%PlayerField._on_hover) ):
+				card.signal_self_in.disconnect(%PlayerField._on_hover)
+			if ( card.signal_self_out.is_connected(%PlayerField._on_hover_exit) ):
+				card.signal_self_out.disconnect(%PlayerField._on_hover_exit)
+
+			#And connects them to the PlayerField, which handles ability assignment and targeting.
+			card.signal_self_in.connect(%PlayerHand._on_hover)
+			card.signal_self_out.connect(%PlayerHand._on_hover_exit)
+			refresh_field()
+			%PlayerHand.refresh_hand()
 	
 
 	
@@ -128,12 +144,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
-	if Input.is_action_just_pressed("left_click"):
-			if hovered_player_card != null:
-				print(hovered_player_card)
-				print("Sup")
+	if hovered_player_card != null:
+		print(hovered_player_card)
+		print("This is from the hover")
+		if Input.is_action_just_pressed("left_click"):
 				_on_click(hovered_player_card)
+		if Input.is_action_just_released("left_click"):
+				_on_release(hovered_player_card)
+				
+					
 	if mouse_start != null:
 		mouse_current = get_viewport().get_mouse_position()
 		var mouse_dif = mouse_start - mouse_current
@@ -143,8 +162,6 @@ func _process(delta):
 		else:
 			dragging == false
 
-	if Input.is_action_just_released("left_click"):
-		_on_release(hovered_player_card)
 	
 
 	pass

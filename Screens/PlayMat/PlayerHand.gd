@@ -66,8 +66,6 @@ func _on_draw_source(card_id, origin):
 	if cih.size() > 7:
 		return
 	target_position = Vector2(hand_rad_1*cos(target_angle),-(hand_rad_2*sin(target_angle)))
-
-
 	#add card to Cards in Hand
 	#Spawn the card_id passed in
 	var spawned_card =  preload("res://Cards/playcard_template.tscn").instantiate().init(card_id,player_library)
@@ -80,6 +78,8 @@ func _on_draw_source(card_id, origin):
 	spawned_card.start_pos = get_local_mouse_position()
 	spawned_card.stored_position = target_position
 	spawned_card.target_pos = target_position
+	spawned_card.start_scale = base_scale
+	spawned_card.target_scale = base_scale
 	spawned_card.state = spawned_card.states["MovingToHand"]
 	spawned_card.target_rotation = (deg_to_rad((90)) - target_angle)*.25 #Probably deleting this as we implement F_hand
 	spawned_card.stored_rotation = spawned_card.target_rotation
@@ -101,11 +101,14 @@ func refresh_hand():
 	target_angle = (deg_to_rad(60))
 	target_position = Vector2(hand_rad_1*cos(target_angle),-(hand_rad_2*sin(target_angle)))
 	for card in cih:
+		print(card.card_name)
 		card.start_pos = card.position
 		card.stored_position = target_position
 		card.target_pos = target_position
 		card.target_rotation = (deg_to_rad((90)) - target_angle)*.25
 		card.stored_rotation = (deg_to_rad((90)) - target_angle)*.25
+		card.start_scale = base_scale
+		card.target_scale = base_scale
 		card.state = card.states["MovingToHand"] #May switch to the "Reorganizing" state
 		target_angle += 0.25
 		target_position = Vector2(hand_rad_1*cos(target_angle),-(hand_rad_2*sin(target_angle)))
@@ -124,7 +127,6 @@ func _ready():
 	#Search for all nodes with a _deck_list property and register them to the hand as possible draw sources
 	if get_parent() != null:
 		var children = get_parent().get_children()
-		print(children)
 		for i in range(children.size()):
 			if (children[i].get("_deck_list")):
 				children[i].draw_source.connect(_on_draw_source)
