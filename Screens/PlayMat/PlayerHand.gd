@@ -81,7 +81,7 @@ func _on_draw_source(card_id, origin):
 	spawned_card.stored_position = target_position
 	spawned_card.target_pos = target_position
 	spawned_card.state = spawned_card.states["MovingToHand"]
-	spawned_card.target_rotation = (deg_to_rad((90)) - target_angle)*.25 #Probably deleting this as we implement refresh_hand
+	spawned_card.target_rotation = (deg_to_rad((90)) - target_angle)*.25 #Probably deleting this as we implement F_hand
 	spawned_card.stored_rotation = spawned_card.target_rotation
 	target_angle += 0.25
 	var playmat = get_parent()
